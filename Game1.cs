@@ -65,15 +65,12 @@ namespace Monogame_1___Assignment
 
             titleFont = Content.Load<SpriteFont>("Fonts/TitleFont");
 
-            // TODO: use this.Content to load your game content here
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-            // TODO: Add your update logic here
 
             base.Update(gameTime);
         }
@@ -95,10 +92,7 @@ namespace Monogame_1___Assignment
             _spriteBatch.Draw(umbrellaTexture, umbrellaRect, null, Color.White, 0.05f,new Vector2(0,0), SpriteEffects.None, 0f); //need to fix rotation and vector...
             _spriteBatch.Draw(chairTexture, chairRect, Color.White);
 
-
-
             _spriteBatch.End();
-            // TODO: Add your drawing code here
 
             base.Draw(gameTime);
         }
