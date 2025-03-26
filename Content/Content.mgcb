@@ -16,6 +16,13 @@
 #begin Fonts/Bouncy.otf
 /copy:Fonts/Bouncy.otf
 
+#begin Fonts/titleFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/titleFont.spritefont
+
 #begin Images/beachBackground.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
