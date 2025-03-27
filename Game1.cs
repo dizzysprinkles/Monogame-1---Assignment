@@ -12,12 +12,14 @@ namespace Monogame_1___Assignment
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        Texture2D backgroundTexture, beachBallTexture, umbrellaTexture, castleTexture, seagullTexture, chairTexture;
-        Rectangle window, seagullRect, beachBallRect, umbrellaRect, castleRect, chairRect;
+        Texture2D backgroundTexture, beachBallTexture, umbrellaTexture, castleTexture, seagullTexture, chairTexture, boatTexture, crabTexture, beachBoyTexture, beachGirlTexture;
+        Rectangle window, seagullRect, beachBallRect, umbrellaRect, castleRect, chairRect, boatRect, crabRect, beachBoyRect, beachGirlRect;
         SpriteFont titleFont;
 
         Random generator;
         List<Texture2D> seagullTextures;
+
+        float umbrellaRotation, boatOpacity;
 
         public Game1()
         {
@@ -38,11 +40,19 @@ namespace Monogame_1___Assignment
             generator = new Random();
 
             seagullRect = new Rectangle(generator.Next(100, 681), generator.Next(10, 100), 120, 95);
-            umbrellaRect = new Rectangle(-80, 150, 400, 400);
+            umbrellaRect = new Rectangle(50, 150, 176, 200); 
             beachBallRect = new Rectangle(300, 250, 80, 70);
-            chairRect = new Rectangle(60, 325, 200, 200);
+            chairRect = new Rectangle(80, 280, 150, 150);
+            castleRect = new Rectangle(550, 200, 150, 150);
+            boatRect = new Rectangle(generator.Next(100, 750),125,50,50);
+            crabRect = new Rectangle(0,430,110,60);
+            beachBoyRect = new Rectangle(); // Need to position
+            beachGirlRect = new Rectangle(); // Need to position
 
-            
+            umbrellaRotation = (float)generator.NextDouble();
+            boatOpacity = (float)generator.NextDouble();
+
+
             seagullTextures = new List<Texture2D>();
 
             base.Initialize();
@@ -62,6 +72,11 @@ namespace Monogame_1___Assignment
             seagullTexture = seagullTextures[generator.Next(seagullTextures.Count)];
             beachBallTexture = Content.Load<Texture2D>("Images/beachBall");
             chairTexture = Content.Load<Texture2D>("Images/chair");
+            castleTexture = Content.Load<Texture2D>("Images/sandcastle");
+            boatTexture = Content.Load<Texture2D>("Images/boat");
+            crabTexture = Content.Load<Texture2D>("Images/coolCrab");
+            beachBoyTexture = Content.Load<Texture2D>("Images/beachBoy");
+            beachGirlTexture = Content.Load<Texture2D>("Images/beachGirl");
 
             titleFont = Content.Load<SpriteFont>("Fonts/TitleFont");
 
@@ -84,13 +99,17 @@ namespace Monogame_1___Assignment
 
             _spriteBatch.Draw(backgroundTexture, window, Color.White);
 
-            _spriteBatch.DrawString(titleFont, "Beach", new Vector2(110, 10), Color.Black);
+   
+            _spriteBatch.DrawString(titleFont, "Fun in the sun!", new Vector2(150, 450), Color.Black);
 
-            _spriteBatch.Draw(seagullTexture, seagullRect, Color.White);
+            _spriteBatch.Draw(seagullTexture, seagullRect, null, Color.White, 0f, new Vector2(0,0), SpriteEffects.FlipHorizontally, 0f);
+            _spriteBatch.Draw(castleTexture, castleRect, Color.White);
             _spriteBatch.Draw(beachBallTexture, beachBallRect, Color.White);
+            _spriteBatch.Draw(boatTexture, boatRect, null, Color.White * boatOpacity, 0f, new Vector2(0,0), SpriteEffects.None, 0f);
 
-            _spriteBatch.Draw(umbrellaTexture, umbrellaRect, null, Color.White, 0.05f,new Vector2(0,0), SpriteEffects.None, 0f); //need to fix rotation and vector...
+            _spriteBatch.Draw(umbrellaTexture, umbrellaRect, null, Color.White, umbrellaRotation,new Vector2(0,0), SpriteEffects.None, 0f); //0.35 works... 
             _spriteBatch.Draw(chairTexture, chairRect, Color.White);
+            _spriteBatch.Draw(crabTexture, crabRect, Color.White);
 
             _spriteBatch.End();
 
