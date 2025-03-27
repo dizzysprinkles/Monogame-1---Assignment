@@ -44,12 +44,12 @@ namespace Monogame_1___Assignment
             beachBallRect = new Rectangle(300, 250, 80, 70);
             chairRect = new Rectangle(80, 280, 150, 150);
             castleRect = new Rectangle(550, 200, 150, 150);
-            boatRect = new Rectangle(generator.Next(100, 750),125,50,50);
+            boatRect = new Rectangle(generator.Next(200, 750),125,50,50);
             crabRect = new Rectangle(0,430,110,60);
             beachBoyRect = new Rectangle(); // Need to position
             beachGirlRect = new Rectangle(); // Need to position
 
-            umbrellaRotation = (float)generator.NextDouble();
+            umbrellaRotation = (float)generator.NextDouble(); //Need to change and see about specifying what angle of rotation... Goes a bit too far
             boatOpacity = (float)generator.NextDouble();
 
 
@@ -92,14 +92,10 @@ namespace Monogame_1___Assignment
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-
             _spriteBatch.Begin();
 
             _spriteBatch.Draw(backgroundTexture, window, Color.White);
 
-   
             _spriteBatch.DrawString(titleFont, "Fun in the sun!", new Vector2(150, 450), Color.Black);
 
             _spriteBatch.Draw(seagullTexture, seagullRect, null, Color.White, 0f, new Vector2(0,0), SpriteEffects.FlipHorizontally, 0f);
