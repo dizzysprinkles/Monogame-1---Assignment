@@ -15,9 +15,11 @@ namespace Monogame_1___Assignment
         Texture2D backgroundTexture, beachBallTexture, umbrellaTexture, castleTexture, seagullTexture, chairTexture, boatTexture, crabTexture, beachBoyTexture, beachGirlTexture;
         Rectangle window, seagullRect, beachBallRect, umbrellaRect, castleRect, chairRect, boatRect, crabRect, beachBoyRect, beachGirlRect;
         SpriteFont titleFont;
+        SpriteEffects seagullFlip;
 
         Random generator;
         List<Texture2D> seagullTextures;
+        List<SpriteEffects> seagullFlips;
 
         float umbrellaRotation, boatOpacity;
 
@@ -41,8 +43,8 @@ namespace Monogame_1___Assignment
 
             seagullRect = new Rectangle(generator.Next(100, 681), generator.Next(10, 100), 120, 95);
             umbrellaRect = new Rectangle(50, 150, 176, 200); 
-            beachBallRect = new Rectangle(300, 250, 45, 40);
-            chairRect = new Rectangle(80, 280, 150, 150);
+            beachBallRect = new Rectangle(250, 225, 45, 40);
+            chairRect = new Rectangle(60, 280, 150, 150);
             castleRect = new Rectangle(550, 200, 150, 150);
             boatRect = new Rectangle(generator.Next(200, 750),125,50,50);
             crabRect = new Rectangle(0,430,110,60);
@@ -50,10 +52,30 @@ namespace Monogame_1___Assignment
             beachGirlRect = new Rectangle(400,200,100,150);
 
             umbrellaRotation = (float)generator.NextDouble(); 
+
+            while(Math.Round(umbrellaRotation, 3) >= 0.81f)
+            {
+                umbrellaRotation = (float)generator.NextDouble();
+            }
+
             boatOpacity = (float)generator.NextDouble();
+
+            while (Math.Round(boatOpacity, 3) <= 0.4f)
+            {
+                boatOpacity = (float)generator.NextDouble();
+            }
+
 
 
             seagullTextures = new List<Texture2D>();
+
+            seagullFlips = new List<SpriteEffects>();
+            seagullFlips.Add(SpriteEffects.None);
+            seagullFlips.Add(SpriteEffects.FlipVertically);
+            seagullFlips.Add(SpriteEffects.FlipHorizontally);
+
+            seagullFlip = seagullFlips[generator.Next(0, 3)];
+
 
             base.Initialize();
         }
@@ -96,19 +118,19 @@ namespace Monogame_1___Assignment
 
             _spriteBatch.Draw(backgroundTexture, window, Color.White);
 
-            _spriteBatch.DrawString(titleFont, "Fun in the sun!", new Vector2(150, 450), Color.Black);
+            _spriteBatch.DrawString(titleFont, "Fun in the sun !", new Vector2(150, 450), Color.Black); //0.81 is max
 
-            _spriteBatch.Draw(seagullTexture, seagullRect, null, Color.White, 0f, new Vector2(0,0), SpriteEffects.FlipHorizontally, 0f);
+            _spriteBatch.Draw(boatTexture, boatRect, null, Color.White * boatOpacity, 0f, new Vector2(0, 0), SpriteEffects.None, 0f);
+            _spriteBatch.Draw(seagullTexture, seagullRect, null, Color.White, 0f, new Vector2(0,0), seagullFlip, 0f);
             _spriteBatch.Draw(castleTexture, castleRect, Color.White);
             _spriteBatch.Draw(beachBallTexture, beachBallRect, Color.White * 0.7f);
-            _spriteBatch.Draw(boatTexture, boatRect, null, Color.White * boatOpacity, 0f, new Vector2(0,0), SpriteEffects.None, 0f);
 
-            _spriteBatch.Draw(umbrellaTexture, umbrellaRect, null, Color.White, umbrellaRotation,new Vector2(0,0), SpriteEffects.None, 0f); //0.35 works... 
+            _spriteBatch.Draw(umbrellaTexture, umbrellaRect, null, Color.White, umbrellaRotation,new Vector2(0,0), SpriteEffects.None, 0f); 
             _spriteBatch.Draw(chairTexture, chairRect, Color.White);
-            _spriteBatch.Draw(crabTexture, crabRect, Color.White);
+            _spriteBatch.Draw(crabTexture, crabRect, Color.White * 0.85f);
 
             _spriteBatch.Draw(beachBoyTexture, beachBoyRect, Color.White);
-            _spriteBatch.Draw(beachGirlTexture, beachGirlRect, Color.White * 2f);
+            _spriteBatch.Draw(beachGirlTexture, beachGirlRect, Color.White);
 
             _spriteBatch.End();
 
