@@ -41,15 +41,15 @@ namespace Monogame_1___Assignment
 
             seagullRect = new Rectangle(generator.Next(100, 681), generator.Next(10, 100), 120, 95);
             umbrellaRect = new Rectangle(50, 150, 176, 200); 
-            beachBallRect = new Rectangle(300, 250, 80, 70);
+            beachBallRect = new Rectangle(300, 250, 45, 40);
             chairRect = new Rectangle(80, 280, 150, 150);
             castleRect = new Rectangle(550, 200, 150, 150);
             boatRect = new Rectangle(generator.Next(200, 750),125,50,50);
             crabRect = new Rectangle(0,430,110,60);
-            beachBoyRect = new Rectangle(); // Need to position
-            beachGirlRect = new Rectangle(); // Need to position
+            beachBoyRect = new Rectangle(300,290,100,150); 
+            beachGirlRect = new Rectangle(400,200,100,150);
 
-            umbrellaRotation = (float)generator.NextDouble(); //Need to change and see about specifying what angle of rotation... Goes a bit too far
+            umbrellaRotation = (float)generator.NextDouble(); 
             boatOpacity = (float)generator.NextDouble();
 
 
@@ -100,12 +100,15 @@ namespace Monogame_1___Assignment
 
             _spriteBatch.Draw(seagullTexture, seagullRect, null, Color.White, 0f, new Vector2(0,0), SpriteEffects.FlipHorizontally, 0f);
             _spriteBatch.Draw(castleTexture, castleRect, Color.White);
-            _spriteBatch.Draw(beachBallTexture, beachBallRect, Color.White);
+            _spriteBatch.Draw(beachBallTexture, beachBallRect, Color.White * 0.7f);
             _spriteBatch.Draw(boatTexture, boatRect, null, Color.White * boatOpacity, 0f, new Vector2(0,0), SpriteEffects.None, 0f);
 
             _spriteBatch.Draw(umbrellaTexture, umbrellaRect, null, Color.White, umbrellaRotation,new Vector2(0,0), SpriteEffects.None, 0f); //0.35 works... 
             _spriteBatch.Draw(chairTexture, chairRect, Color.White);
             _spriteBatch.Draw(crabTexture, crabRect, Color.White);
+
+            _spriteBatch.Draw(beachBoyTexture, beachBoyRect, Color.White);
+            _spriteBatch.Draw(beachGirlTexture, beachGirlRect, Color.White * 2f);
 
             _spriteBatch.End();
 
